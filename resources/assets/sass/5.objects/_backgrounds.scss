@@ -1,0 +1,39 @@
+//Theme colours scss map is located in _colours.scss partial
+@each $name, $colour in $theme-colours {
+	.bg {
+		&-#{$name} {
+			background-color: $colour;
+		}
+	}
+}
+
+@each $name, $colour in $theme-colours {
+	.hov\:bg-#{$name} {
+		transition: background-color 0.3s ease;
+
+		&:hover {
+			background-color: $colour;
+		}
+	}
+}
+
+@each $prefix, $size in $screens {
+
+	@media screen and (max-width: #{$size}) {
+		@each $name, $colour in $theme-colours {
+			.#{$prefix}\:bg {
+				&-#{$name} {
+					background-color: $colour;
+				}
+			}
+		}
+	}
+}
+
+.bg-trans-black {
+    background: rgba($black, 0.15);
+}
+
+.bg-vertical-gradient {
+	background: linear-gradient(to bottom, $gallery 0%, $white 100%);
+}

@@ -1,0 +1,85 @@
+/*
+* 1.Settings
+* =========================
+* Import the settings, these define colours, typography and global variables
+* for use across the partials.
+*/
+@import '1.settings/screen-sizes';
+@import '1.settings/global_variables';
+@import '1.settings/colours';
+@import '1.settings/type';
+
+/*
+* 2.Tools
+* =========================
+* This defines helpful mixins and tools for use across partials.
+*/
+@import '2.tools/functions';
+@import '2.tools/mixins';
+
+/*
+* 3.Generic
+* =========================
+* This defines styles for elements on a low level. Good for normalize, resets etc.
+*/
+@import '3.generic/normalize';
+@import '3.generic/reset';
+@import '3.generic/box-sizing';
+
+/*
+* 4.Base
+* =========================
+* Use this to specify how elements should look more specifically
+* things such as how links, lists and headings should look.
+*/
+@import '4.base/base';
+@import '4.base/typography';
+
+/*
+* 5.Objects
+* =========================
+* Drilling down a bit now, define big parts of our UI.
+* Things like layout / grid obects. Wrapper / container objects.
+* These Objects shouldn't contain any paint / aesthetics.
+*/
+@import '5.objects/grid';
+@import '5.objects/containers';
+@import '5.objects/display';
+@import '5.objects/text-transformers';
+@import '5.objects/svg-modifiers';
+@import '5.objects/layers';
+@import '5.objects/layout-helpers';
+@import '5.objects/spacing';
+@import '5.objects/backgrounds';
+@import '5.objects/borders';
+@import '5.objects/flex';
+@import '5.objects/icons';
+
+/*
+* 6.Components
+* =========================
+* Drilling down a bit now, These add a layer of paint to our Objects.
+*/
+@import '6.components/form-elements';
+@import '6.components/buttons';
+@import '6.components/pods';
+@import '6.components/videos';
+@import '6.components/tabs';
+@import '6.components/tables';
+@import '6.components/headers';
+
+/*
+* 7.Theme
+* =========================
+* Use this for pretty specific styles.
+*/
+@import '7.theme/landing';
+@import '7.theme/login-bar';
+
+/*
+* 8.Trumps
+* =========================
+* Use this to trump everything, similiar to our normal shame.css.
+* Here we put important rules and super specific utility functions.
+*/
+//@import '8.trumps/shame';

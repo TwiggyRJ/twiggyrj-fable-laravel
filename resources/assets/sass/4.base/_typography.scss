@@ -1,0 +1,50 @@
+p,
+a,
+li,
+blockquote,
+form,span {
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+// as determined by design
+h1,
+.h1 {
+	@include font-size(40px);
+	line-height: rem-calc(45px);
+	font-family: $header-font-family;
+    font-weight: 300;
+    letter-spacing: 15px;
+}
+
+@media screen and (max-width: $medium) {
+    h1,
+    .h1 {
+    	@include font-size(35px);
+    	line-height: rem-calc(40px);
+        letter-spacing: 5px;
+    }
+}
+
+h2,
+.h2 {
+	@include font-size(25px);
+	line-height: rem-calc(28px);
+	font-family: $header-font-family;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+h3,
+.h3 {
+	@include font-size(22px);
+	line-height: rem-calc(28px);
+	font-family: $header-font-family;
+    font-weight: 500;
+    letter-spacing: 3px;
+}

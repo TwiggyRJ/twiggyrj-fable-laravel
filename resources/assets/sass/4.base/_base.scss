@@ -1,0 +1,26 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	font-size: $base-font-size;
+	line-height: $base-line-height;
+	overflow-x: hidden;
+}
+
+body {
+	font-family: $base-font-family;
+	color: $colour-font;
+	height: auto;
+}
+
+// Contain images and iframe to their parent, rarely do we want them escaping their parent.
+img, iframe {
+	max-width: 100%;
+}
+
+// This gets around width and height attributes on images.
+img {
+	width: 100%;
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+}

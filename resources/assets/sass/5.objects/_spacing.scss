@@ -1,0 +1,171 @@
+/**
+* handles padding & margin
+*/
+.m-auto {
+	margin: 0 auto;
+}
+
+@each $key, $side in $sides  {
+	@each $s, $size in $sizes {
+		.#{$side}-#{$s} {
+			#{$side}: #{$size};
+		}
+		.per-#{$side}-#{$s} {
+			#{$side}: #{$s}#{'%'};
+		}
+	}
+}
+
+.py {
+	@each $s, $size in $sizes {
+		&-#{$s} {
+			padding-top: #{$size} ;
+			padding-bottom: #{$size} ;
+		}
+	}
+}
+
+.px {
+	@each $s, $size in $sizes {
+		&-#{$s} {
+			padding-right: #{$size} ;
+			padding-left: #{$size} ;
+		}
+	}
+}
+
+.p {
+	//$s is $key for $sizes map
+	@each $s, $size in $sizes {
+		@each $key, $side in $sides {
+			&#{$key}-#{$s} {
+				padding-#{$side}: #{$size};
+			}
+		}
+		&-#{$s} {
+			padding: #{$size};
+		}
+	}
+}
+
+.my {
+	@each $s, $size in $sizes {
+		&-#{$s} {
+			margin-top: #{$size} ;
+			margin-bottom: #{$size} ;
+		}
+	}
+}
+
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mx {
+	@each $s, $size in $sizes {
+		&-#{$s} {
+			margin-right: #{$size} ;
+			margin-left: #{$size} ;
+		}
+	}
+}
+
+.m {
+	@each $s, $size in $sizes {
+		@each $key, $side in $sides {
+			&#{$key}-#{$s} {
+				margin-#{$side}: #{$size};
+			}
+			&#{$key}-auto {
+				margin-#{$side}: auto;
+			}
+		}
+		&-#{$s} {
+			margin: #{$size};
+		}
+	}
+}
+
+@each $prefix, $size in $screens {
+	@media screen and (max-width: #{$size}) {
+
+		.#{$prefix}\:py {
+			@each $s, $size in $sizes {
+				&-#{$s} {
+					padding-top: #{$size} ;
+					padding-bottom: #{$size} ;
+				}
+			}
+		}
+
+		.#{$prefix}\:px {
+			@each $s, $size in $sizes {
+				&-#{$s} {
+					padding-right: #{$size} ;
+					padding-left: #{$size} ;
+				}
+			}
+		}
+
+		.#{$prefix}\:p {
+			//$s is $key for $sizes map
+			@each $s, $size in $sizes {
+				@each $key, $side in $sides {
+					&#{$key}-#{$s} {
+						padding-#{$side}: #{$size};
+					}
+				}
+				&-#{$s} {
+					padding: #{$size};
+				}
+			}
+		}
+
+		.#{$prefix}\:my {
+			@each $s, $size in $sizes {
+				&-#{$s} {
+					margin-top: #{$size} ;
+					margin-bottom: #{$size} ;
+				}
+			}
+		}
+
+		.#{$prefix}\:mx {
+			@each $s, $size in $sizes {
+				&-#{$s} {
+					margin-right: #{$size} ;
+					margin-left: #{$size} ;
+				}
+			}
+		}
+
+		.#{$prefix}\:m {
+			@each $s, $size in $sizes {
+				@each $key, $side in $sides {
+					&#{$key}-#{$s} {
+						margin-#{$side}: #{$size};
+					}
+				}
+				&-#{$s} {
+					margin: #{$size};
+				}
+			}
+		}
+
+		.#{$prefix}\:mx-auto {
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+}
+
+.align-hack {
+	//$s is $key for $sizes map
+	@each $s, $size in $sizes {
+		&-#{$s} {
+			width: calc(100% + #{$size});
+			margin-left: -#{$size/2};
+		}
+	}
+}

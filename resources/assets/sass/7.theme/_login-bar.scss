@@ -1,0 +1,33 @@
+.login-bar {
+  form {
+    display: flex;
+    align-content: flex-end;
+    justify-content: flex-end;
+    flex-direction: row;
+    padding: 20px;
+
+    max-width: 860px;
+    margin: 0 auto;
+
+    @media screen and (max-width: $medium) {
+      align-content: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    input {
+      background-color: $white;
+      flex: 1;
+      margin: 0;
+
+      font-family: $base-font-family;
+      padding: 0 20px;
+      margin-right: 20px;
+
+      @media screen and (max-width: $medium) {
+        margin: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

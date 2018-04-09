@@ -1,0 +1,38 @@
+@mixin font-size($font-size, $line-height: auto) {
+    font-size: $font-size;
+    font-size: ($font-size / $base-font-size) * 1rem;
+}
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin linear-gradient($start, $end, $middle: blend($start, $end)) {
+	background-color: $start;
+    background: linear-gradient(to right, $start 0%, $middle 50%, $end 100%);
+}
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .ratio-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,12 @@
+/*
+* At the moment this just contains some variables but can easily expand to
+* include a modular scale etc.
+*/
+
+$base-font-family: 'Rubik', 'Helvetica', 'Arial', sans-serif;
+$base-serif-font-family: 'Lato', serif;
+
+$base-font-family: $base-font-family;
+$header-font-family: $base-font-family;
+$base-line-height: 1.5;
+$base-font-size: 16px;

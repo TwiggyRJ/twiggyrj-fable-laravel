@@ -1,0 +1,51 @@
+.none {
+    display: none;
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+.flex {
+    display: flex;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+@each $prefix, $size in $screens {
+    @media screen and (max-width: #{$size}) {
+        .#{$prefix}\:none {
+            display: none;
+        }
+
+        .#{$prefix}\:inline {
+            display: inline;
+        }
+
+        .#{$prefix}\:inline-block {
+            display: inline-block;
+        }
+
+        .#{$prefix}\:block {
+            display: block;
+        }
+
+        .#{$prefix}\:flex {
+            display: flex;
+        }
+
+        .#{$prefix}\:inline-flex {
+            display: inline-flex;
+        }
+    }
+}

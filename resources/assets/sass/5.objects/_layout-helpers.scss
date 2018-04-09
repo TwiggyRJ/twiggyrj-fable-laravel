@@ -1,0 +1,77 @@
+//changing this order will break things!
+.clear {
+    clear: both;
+}
+.cf {
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.float-none {
+    float: none;
+}
+.valign-top {
+    vertical-align: top;
+}
+.valign-middle {
+    vertical-align: middle;
+}
+.valign-bottom {
+    vertical-align: bottom;
+}
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
+.fixed {
+    position: fixed;
+}
+.hidden {
+    overflow: hidden;
+}
+.scroll {
+    overflow: scroll;
+}
+.sixteen-nine {
+  @include aspect-ratio(16, 9);
+}
+.sixteen-six {
+  @include aspect-ratio(16, 6);
+}
+
+@each $prefix, $size in $screens {
+    @media screen and (max-width: $size) {
+        .#{$prefix}\:float-left {
+            float: left;
+        }
+
+        .#{$prefix}\:float-right {
+            float: right;
+        }
+
+        .#{$prefix}\:float-none {
+            float: none;
+        }
+
+        .#{$prefix}\:relative {
+            position: relative;
+        }
+
+        .#{$prefix}\:absolute {
+            position: absolute;
+        }
+    }
+}

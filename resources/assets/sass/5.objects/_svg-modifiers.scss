@@ -1,0 +1,10 @@
+@each $name, $colour in $theme-colours {
+	.svg-fill\:#{$name} {
+		fill: $colour;
+	}
+}
+@each $name, $colour in $theme-colours {
+	.svg-stroke\:#{$name} {
+		stroke: $colour;
+	}
+}

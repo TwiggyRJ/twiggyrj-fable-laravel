@@ -6,6 +6,14 @@
 	max-width: $xlarge;
 }
 
+.container-constrained {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	max-width: $constrained;
+}
+
 @media screen and (max-width: $xlarge) {
   .container {
     padding-left: 15px;

@@ -1,0 +1,77 @@
+{#
+  Featured Listing page template
+  templates/landing.twig
+#}
+
+{% extends "templates.base" %}
+{% block header %}
+  {% include 'components.listing_header' %}
+{% endblock %}
+{% block content %}
+  <section class="container landing-container">
+    <h2 class="text-center black">Latest Stories</h2>
+    <div class="featured-stories">
+      <div class="story-pod-xl" style="background-image: url('https://i.imgur.com/RIhHH2f.jpg'); background-position: 50% 50%;">
+        <div class="bg-trans-black p-20">
+          <h3>Story D</h3>
+          <div class="py-20">
+            <a href="" class="bold">Aaron Polaski</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p><a href="" class="medium">Go to Story</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="story-pod-xl" style="background-image: url('https://i.imgur.com/RIhHH2f.jpg'); background-position: 50% 50%;">
+        <div class="bg-trans-black p-20">
+          <h3>Story E</h3>
+          <div class="py-20">
+            <a href="" class="bold">Aaron Polaski</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p><a href="" class="medium">Go to Story</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="featured-stories mt-20">
+      <div class="story-pod" style="background-image: url('https://wallpapertag.com/wallpaper/full/a/7/b/36111-beautiful-fantasy-backgrounds-1920x1080.jpg'); background-position: 50% 50%;">
+        <div class="bg-trans-black p-20">
+          <h3>Story F</h3>
+          <div class="py-20">
+            <a href="" class="bold">Serene Montague</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p><a href="" class="medium">Go to Story</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="story-pod" style="background-image: url('https://images.alphacoders.com/125/thumb-1920-125091.jpg'); background-position: 50% 50%;">
+        <div class="bg-trans-black p-20">
+          <h3>Story G</h3>
+          <div class="py-20">
+            <a href="" class="bold">Doris Crusher</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p><a href="" class="medium">Go to Story</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="story-pod" style="background-image: url('https://i.imgur.com/RIhHH2f.jpg'); background-position: 50% 50%;">
+        <div class="bg-trans-black p-20">
+          <h3>Story H</h3>
+          <div class="py-20">
+            <a href="" class="bold">Aaron Polaski</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p><a href="" class="medium">Go to Story</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="py-20 pl-10">
+      <a href="" class="blue bold">See more...</a>
+    </div>
+  </section>
+  <section class="bg-blue">
+    <div class="container landing-container white">
+      <h2 class="text-center">Sci-fi</h2>
+      
+    </div>
+  </section>
+{% endblock %}

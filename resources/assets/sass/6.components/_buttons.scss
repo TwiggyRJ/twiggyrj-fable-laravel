@@ -1,5 +1,11 @@
-.button {
+button {
   border: none;
+  &:active {
+    border: none;
+  }
+}
+
+.button {
   border-radius: 25px;
   height: 50px;
   padding: 10px 50px;

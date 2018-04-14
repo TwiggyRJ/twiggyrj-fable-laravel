@@ -11,12 +11,15 @@ $gallery: #eeeeee;
 
 // Theme Colours
 $forest-green: #3aae2a;
-$purple: #ae2a71;
+$magenta: #ae2a71;
 $palm-green: #0d270a;
 $blue: #4276ba;
 $alt-blue: #3b6aa7;
 $dark-blue: #2E5282;
 $pink: #d2599b;
+$purple: #984dc6;
+$green: #84ba42;
+
 $verdino-blue: #014289;
 
 // Variables
@@ -53,6 +56,9 @@ $theme-colours: (
 	colour-font: $colour-font,
 	forest-green: $forest-green,
 	pink: $pink,
+	magenta: $magenta,
+	purple: $purple,
+	green: $green,
 	gallery: $gallery,
 	palm-green: $palm-green,
 	verdino-blue: $verdino-blue

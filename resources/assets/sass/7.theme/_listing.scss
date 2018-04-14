@@ -1,0 +1,15 @@
+.featured-stories {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+
+  @media screen and (max-width: $xmedium) {
+    flex-wrap: wrap;
+    //justify-content: space-around;
+  }
+
+  @media screen and (max-width: $small) {
+    display: block;
+  }
+}

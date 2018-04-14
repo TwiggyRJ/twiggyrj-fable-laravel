@@ -11,22 +11,5 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig({
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'stage-3']
-          }
-        }
-      }
-    ]
-  }
-})
-
-// App
-mix.js('resources/assets/js/app.js', 'public/js')
-  .sass('resources/assets/sass/app.scss', 'public/css');
+mix.react('resources/assets/js/app.js', 'public/js')
+   .sass('resources/assets/sass/app.scss', 'public/css');

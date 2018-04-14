@@ -1,0 +1,76 @@
+.story-pod {
+  background: $blue;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+  color: $black;
+  max-width: 32%;
+  width: 100%;
+  min-height: 20vw;
+
+  > div {
+    border-radius: 20px;
+    color: $white;
+    min-height: 20vw;
+    
+    h3 {
+      font-weight: 600;
+    }
+
+    p {
+      font-weight: 400;
+    }
+  }
+
+  @media screen and (max-width: $xmedium) {
+    max-width: 48%;
+  }
+
+  @media screen and (max-width: $small) {
+    max-width: none;
+    margin-bottom: 10px;
+  }
+}
+
+.story-pod-xl {
+  background: $blue;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+  color: $white;
+  width: 48%;
+  min-height: 30vw;
+
+  @media screen and (max-width: $xmedium) {
+    min-height: 40vw;
+  }
+
+  @media screen and (max-width: $medium) {
+    width: 100%;
+    margin-bottom: 10px;
+    min-height: 50vw;
+  }
+
+  > div {
+    border-radius: 20px;
+    min-height: 30vw;
+
+    @media screen and (max-width: $xmedium) {
+      min-height: 40vw;
+    }
+
+    @media screen and (max-width: $medium) {
+      min-height: 50vw;
+    }
+    
+    h3 {
+      @include font-size(40px);
+      line-height: rem-calc(50px);
+      font-weight: 600;
+    }
+
+    p {
+      font-weight: 400;
+    }
+  }
+}

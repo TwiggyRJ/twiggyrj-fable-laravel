@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/stories', function () {
+    return view('featured');
+});
+
+Route::get('/stories/create', function () {
+    return view('create');
+});

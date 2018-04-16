@@ -1,12 +1,59 @@
 .story-text-block {
-  font-family: $base-serif-font-family;
-  padding-bottom: 20px;
+  padding: 50px 0;
+  margin-bottom: 20px;
+
+  p {
+    font-family: $base-serif-font-family;
+    @include font-size(16px);
+    line-height: rem-calc(20px);
+  }
+}
+
+.story-dialog-block {
+  padding: 50px 0;
+  margin-bottom: 20px;
+
+  p {
+    font-family: $base-serif-font-family;
+    @include font-size(16px);
+    line-height: rem-calc(20px);
+  }
 }
 
 .story-interaction-block {
   background: $blue;
-  color: $white;
-  font-family: $base-serif-font-family;
   padding: 50px 0;
   margin-bottom: 20px;
+
+  > * {
+    color: $white !important;
+    font-family: $base-serif-font-family !important;
+  }
+
+  .ql-editor.ql-blank::before {
+    color: $white !important;
+    font-family: $base-serif-font-family !important;
+  }
+
+  .ql-snow .ql-picker.ql-header .ql-picker-label::before, .ql-snow .ql-picker.ql-header {
+    color: $white !important;
+  }
+
+  .ql-snow .ql-picker-options .ql-picker-item::before {
+    color: $black !important;
+  }
+
+  .ql-snow .ql-stroke {
+    stroke: $white !important;
+  }
+
+  .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    fill: $white !important;
+  }
+
+  p {
+    font-family: $base-serif-font-family;
+    @include font-size(16px);
+    line-height: rem-calc(20px);
+  }
 }

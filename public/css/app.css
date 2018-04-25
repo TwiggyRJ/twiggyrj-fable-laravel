@@ -14670,6 +14670,66 @@ button:active {
           flex-direction: column;
 }
 
+.page-title-input {
+  color: #ffffff;
+  border: none;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-title-input::-webkit-input-placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-title-input:-ms-input-placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-title-input::-ms-input-placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-title-input::placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-description-input {
+  color: #ffffff;
+  border: none;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-description-input::-webkit-input-placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-description-input:-ms-input-placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-description-input::-ms-input-placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
+.page-description-input::placeholder {
+  color: #ffffff;
+  font-family: "Rubik", "Helvetica", "Arial", sans-serif;
+}
+
 .welcome-block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -17755,6 +17815,40 @@ button:active {
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.25rem;
+}
+
+.story-creator-p-item-container {
+  padding: 50px 0;
+}
+
+.story-image {
+  height: 50vh;
+  overflow: hidden;
+}
+
+.story-image img {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.story-creator-toolbelt {
+  width: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.story-creator-toolbelt button {
+  color: #000000;
 }
 
 /*

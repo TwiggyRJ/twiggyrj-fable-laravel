@@ -24,3 +24,33 @@
   justify-content: flex-start;
   flex-direction: column;
 }
+
+.page-title-input {
+  color: $white;
+  border: none;
+  font-family: $base-font-family;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  &::placeholder {
+    color: $white;
+    font-family: $base-font-family;
+  }
+}
+
+.page-description-input {
+  color: $white;
+  border: none;
+  font-family: $base-font-family;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  &::placeholder {
+    color: $white;
+    font-family: $base-font-family;
+  }
+}

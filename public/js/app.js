@@ -16268,7 +16268,7 @@ __webpack_require__(84);
  */
 
 window.addEventListener('load', function () {
-  __webpack_require__(107);
+  __webpack_require__(225);
 });
 
 /***/ }),
@@ -38285,335 +38285,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 107 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TextEditor__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_identifiers__ = __webpack_require__(209);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-// fake data generator
-var getItems = function getItems(count) {
-  return Array.from({ length: count }, function (v, k) {
-    return k;
-  }).map(function (k) {
-    return {
-      id: 'item-' + k,
-      content: 'item ' + k
-    };
-  });
-};
-
-// a little function to help us with reordering the result
-var reorder = function reorder(list, startIndex, endIndex) {
-  var result = Array.from(list);
-
-  var _result$splice = result.splice(startIndex, 1),
-      _result$splice2 = _slicedToArray(_result$splice, 1),
-      removed = _result$splice2[0];
-
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-var grid = 8;
-
-var getItemStyle = function getItemStyle(isDragging, draggableStyle) {
-  return _extends({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: grid * 2,
-    margin: '0 0 ' + grid + 'px 0',
-
-    // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey"
-
-  }, draggableStyle);
-};
-
-var getListStyle = function getListStyle(isDraggingOver) {
-  return {
-    background: isDraggingOver ? "none" : "none"
-  };
-};
-
-var StoryCreator = function (_Component) {
-  _inherits(StoryCreator, _Component);
-
-  function StoryCreator(props) {
-    _classCallCheck(this, StoryCreator);
-
-    var _this = _possibleConstructorReturn(this, (StoryCreator.__proto__ || Object.getPrototypeOf(StoryCreator)).call(this, props));
-
-    _this.state = {
-      content: [],
-      contentLength: null
-    };
-
-    _this.addElement = _this.addElement.bind(_this);
-    _this.onDragEnd = _this.onDragEnd.bind(_this);
-    return _this;
-  }
-
-  _createClass(StoryCreator, [{
-    key: 'addElement',
-    value: function addElement(toAdd) {
-      var content = this.state.content.slice();
-      if (toAdd === 'text') {
-        content.push({
-          type: 'text',
-          content: '',
-          config: {
-            placeholder: 'Get those creative juices pumping!',
-            theme: 'snow'
-          },
-          id: '' + Object(__WEBPACK_IMPORTED_MODULE_4__lib_identifiers__["a" /* guid */])()
-        });
-      } else if (toAdd === 'dialog') {
-        content.push({
-          type: 'dialog',
-          content: '',
-          config: {
-            placeholder: 'Create some awesome dialog!',
-            theme: 'bubble'
-          },
-          id: '' + Object(__WEBPACK_IMPORTED_MODULE_4__lib_identifiers__["a" /* guid */])()
-        });
-      } else if (toAdd === 'interaction') {
-        content.push({
-          type: 'interaction',
-          content: '',
-          config: {
-            placeholder: 'Create some awesome story development!',
-            theme: 'snow'
-          },
-          id: '' + Object(__WEBPACK_IMPORTED_MODULE_4__lib_identifiers__["a" /* guid */])()
-        });
-      } else if (toAdd === 'image') {
-        content.push({ type: 'image', config: { size: 'l', src: '' }, id: '' + Object(__WEBPACK_IMPORTED_MODULE_4__lib_identifiers__["a" /* guid */])() });
-      }
-      this.setState({ content: content, contentLength: content.length });
-    }
-  }, {
-    key: 'onDragEnd',
-    value: function onDragEnd(result) {
-      // dropped outside the list
-      if (!result.destination) {
-        return;
-      }
-
-      var content = reorder(this.state.content, result.source.index, result.destination.index);
-
-      this.setState({
-        content: content
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var content = this.state.content;
-
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["a" /* DragDropContext */],
-        { onDragEnd: this.onDragEnd },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'relative' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'live-stage' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["c" /* Droppable */],
-              { droppableId: 'droppable' },
-              function (provided, snapshot) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'div',
-                  {
-                    ref: provided.innerRef,
-                    style: getListStyle(snapshot.isDraggingOver)
-                  },
-                  content.map(function (element, index) {
-                    if (element.type === 'text') {
-                      console.log('run');
-                      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
-                        { key: element.id, draggableId: element.id, index: index },
-                        function (provided, snapshot) {
-                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            _extends({
-                              ref: provided.innerRef
-                            }, provided.draggableProps, provided.dragHandleProps),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'div',
-                              { className: 'container' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { key: element.id, className: 'container-constrained m-auto story-text-block' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TextEditor__["a" /* default */], { id: element.id, config: element.config })
-                              )
-                            )
-                          );
-                        }
-                      );
-                    } else if (element.type === 'image') {
-                      if (element.config.size === l) {
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                          __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
-                          { key: element.id, draggableId: element.id, index: index },
-                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { key: element.id, src: element.config.src })
-                        );
-                      } else {
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                          __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
-                          { key: element.id, draggableId: element.id, index: index },
-                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'container' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'div',
-                              { key: element.id, className: 'container-constrained m-auto' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: element.config.src })
-                            )
-                          )
-                        );
-                      }
-                    } else if (element.type === 'dialog') {
-                      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
-                        { key: element.id, draggableId: element.id, index: index },
-                        function (provided, snapshot) {
-                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            _extends({
-                              key: element.id,
-                              ref: provided.innerRef
-                            }, provided.draggableProps, provided.dragHandleProps),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'div',
-                              { className: 'container-constrained story-dialog-block m-auto' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'p',
-                                null,
-                                'dialog'
-                              )
-                            )
-                          );
-                        }
-                      );
-                    } else if (element.type === 'interaction') {
-                      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
-                        { key: element.id, draggableId: element.id, index: index },
-                        function (provided, snapshot) {
-                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            _extends({
-                              key: element.id,
-                              ref: provided.innerRef
-                            }, provided.draggableProps, provided.dragHandleProps),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'div',
-                              { className: 'story-interaction-block' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'container container-constrained m-auto' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TextEditor__["a" /* default */], { id: element.id, config: element.config })
-                              )
-                            )
-                          );
-                        }
-                      );
-                    }
-                  }),
-                  provided.placeholder
-                );
-              }
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'bg-white fixed toolbox-container' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'toolbox' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'toolbox-buttons' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'button',
-                  { className: 'bg-blue p-20 text-left white', onClick: function onClick() {
-                      return _this2.addElement('text');
-                    } },
-                  'Add Text'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'button',
-                  { className: 'bg-pink p-20 text-left white', onClick: function onClick() {
-                      return _this2.addElement('dialog');
-                    } },
-                  'Add Dialog'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'button',
-                  { className: 'bg-magenta p-20 text-left white', onClick: function onClick() {
-                      return _this2.addElement('interaction');
-                    } },
-                  'Add Interaction'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'button',
-                  { className: 'bg-purple p-20 text-left white', onClick: function onClick() {
-                      return _this2.addElement('image');
-                    } },
-                  'Add Image'
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return StoryCreator;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (StoryCreator);
-
-
-if (document.getElementById('create-container')) {
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(StoryCreator, null), document.getElementById('create-container'));
-}
-
-/***/ }),
+/* 107 */,
 /* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -81838,7 +81510,7 @@ module.exports = Array.isArray || function (arr) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = guid;
+/* unused harmony export guid */
 function guid() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -81851,6 +81523,802 @@ function guid() {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var randomFromSeed = __webpack_require__(219);
+
+var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+var alphabet;
+var previousSeed;
+
+var shuffled;
+
+function reset() {
+    shuffled = false;
+}
+
+function setCharacters(_alphabet_) {
+    if (!_alphabet_) {
+        if (alphabet !== ORIGINAL) {
+            alphabet = ORIGINAL;
+            reset();
+        }
+        return;
+    }
+
+    if (_alphabet_ === alphabet) {
+        return;
+    }
+
+    if (_alphabet_.length !== ORIGINAL.length) {
+        throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. You submitted ' + _alphabet_.length + ' characters: ' + _alphabet_);
+    }
+
+    var unique = _alphabet_.split('').filter(function(item, ind, arr){
+       return ind !== arr.lastIndexOf(item);
+    });
+
+    if (unique.length) {
+        throw new Error('Custom alphabet for shortid must be ' + ORIGINAL.length + ' unique characters. These characters were not unique: ' + unique.join(', '));
+    }
+
+    alphabet = _alphabet_;
+    reset();
+}
+
+function characters(_alphabet_) {
+    setCharacters(_alphabet_);
+    return alphabet;
+}
+
+function setSeed(seed) {
+    randomFromSeed.seed(seed);
+    if (previousSeed !== seed) {
+        reset();
+        previousSeed = seed;
+    }
+}
+
+function shuffle() {
+    if (!alphabet) {
+        setCharacters(ORIGINAL);
+    }
+
+    var sourceArray = alphabet.split('');
+    var targetArray = [];
+    var r = randomFromSeed.nextValue();
+    var characterIndex;
+
+    while (sourceArray.length > 0) {
+        r = randomFromSeed.nextValue();
+        characterIndex = Math.floor(r * sourceArray.length);
+        targetArray.push(sourceArray.splice(characterIndex, 1)[0]);
+    }
+    return targetArray.join('');
+}
+
+function getShuffled() {
+    if (shuffled) {
+        return shuffled;
+    }
+    shuffled = shuffle();
+    return shuffled;
+}
+
+/**
+ * lookup shuffled letter
+ * @param index
+ * @returns {string}
+ */
+function lookup(index) {
+    var alphabetShuffled = getShuffled();
+    return alphabetShuffled[index];
+}
+
+module.exports = {
+    characters: characters,
+    seed: setSeed,
+    lookup: lookup,
+    shuffled: getShuffled
+};
+
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var randomByte = __webpack_require__(220);
+
+function encode(lookup, number) {
+    var loopCounter = 0;
+    var done;
+
+    var str = '';
+
+    while (!done) {
+        str = str + lookup( ( (number >> (4 * loopCounter)) & 0x0f ) | randomByte() );
+        done = number < (Math.pow(16, loopCounter + 1 ) );
+        loopCounter++;
+    }
+    return str;
+}
+
+module.exports = encode;
+
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = __webpack_require__(218);
+
+
+/***/ }),
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var alphabet = __webpack_require__(215);
+var encode = __webpack_require__(216);
+var decode = __webpack_require__(221);
+var build = __webpack_require__(222);
+var isValid = __webpack_require__(223);
+
+// if you are using cluster or multiple servers use this to make each instance
+// has a unique value for worker
+// Note: I don't know if this is automatically set when using third
+// party cluster solutions such as pm2.
+var clusterWorkerId = __webpack_require__(224) || 0;
+
+/**
+ * Set the seed.
+ * Highly recommended if you don't want people to try to figure out your id schema.
+ * exposed as shortid.seed(int)
+ * @param seed Integer value to seed the random alphabet.  ALWAYS USE THE SAME SEED or you might get overlaps.
+ */
+function seed(seedValue) {
+    alphabet.seed(seedValue);
+    return module.exports;
+}
+
+/**
+ * Set the cluster worker or machine id
+ * exposed as shortid.worker(int)
+ * @param workerId worker must be positive integer.  Number less than 16 is recommended.
+ * returns shortid module so it can be chained.
+ */
+function worker(workerId) {
+    clusterWorkerId = workerId;
+    return module.exports;
+}
+
+/**
+ *
+ * sets new characters to use in the alphabet
+ * returns the shuffled alphabet
+ */
+function characters(newCharacters) {
+    if (newCharacters !== undefined) {
+        alphabet.characters(newCharacters);
+    }
+
+    return alphabet.shuffled();
+}
+
+/**
+ * Generate unique id
+ * Returns string id
+ */
+function generate() {
+  return build(clusterWorkerId);
+}
+
+// Export all other functions as properties of the generate function
+module.exports = generate;
+module.exports.generate = generate;
+module.exports.seed = seed;
+module.exports.worker = worker;
+module.exports.characters = characters;
+module.exports.decode = decode;
+module.exports.isValid = isValid;
+
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Found this seed-based random generator somewhere
+// Based on The Central Randomizer 1.3 (C) 1997 by Paul Houle (houle@msc.cornell.edu)
+
+var seed = 1;
+
+/**
+ * return a random number based on a seed
+ * @param seed
+ * @returns {number}
+ */
+function getNextValue() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed/(233280.0);
+}
+
+function setSeed(_seed_) {
+    seed = _seed_;
+}
+
+module.exports = {
+    nextValue: getNextValue,
+    seed: setSeed
+};
+
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var crypto = typeof window === 'object' && (window.crypto || window.msCrypto); // IE 11 uses window.msCrypto
+
+function randomByte() {
+    if (!crypto || !crypto.getRandomValues) {
+        return Math.floor(Math.random() * 256) & 0x30;
+    }
+    var dest = new Uint8Array(1);
+    crypto.getRandomValues(dest);
+    return dest[0] & 0x30;
+}
+
+module.exports = randomByte;
+
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var alphabet = __webpack_require__(215);
+
+/**
+ * Decode the id to get the version and worker
+ * Mainly for debugging and testing.
+ * @param id - the shortid-generated id.
+ */
+function decode(id) {
+    var characters = alphabet.shuffled();
+    return {
+        version: characters.indexOf(id.substr(0, 1)) & 0x0f,
+        worker: characters.indexOf(id.substr(1, 1)) & 0x0f
+    };
+}
+
+module.exports = decode;
+
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var encode = __webpack_require__(216);
+var alphabet = __webpack_require__(215);
+
+// Ignore all milliseconds before a certain time to reduce the size of the date entropy without sacrificing uniqueness.
+// This number should be updated every year or so to keep the generated id short.
+// To regenerate `new Date() - 0` and bump the version. Always bump the version!
+var REDUCE_TIME = 1459707606518;
+
+// don't change unless we change the algos or REDUCE_TIME
+// must be an integer and less than 16
+var version = 6;
+
+// Counter is used when shortid is called multiple times in one second.
+var counter;
+
+// Remember the last time shortid was called in case counter is needed.
+var previousSeconds;
+
+/**
+ * Generate unique id
+ * Returns string id
+ */
+function build(clusterWorkerId) {
+
+    var str = '';
+
+    var seconds = Math.floor((Date.now() - REDUCE_TIME) * 0.001);
+
+    if (seconds === previousSeconds) {
+        counter++;
+    } else {
+        counter = 0;
+        previousSeconds = seconds;
+    }
+
+    str = str + encode(alphabet.lookup, version);
+    str = str + encode(alphabet.lookup, clusterWorkerId);
+    if (counter > 0) {
+        str = str + encode(alphabet.lookup, counter);
+    }
+    str = str + encode(alphabet.lookup, seconds);
+
+    return str;
+}
+
+module.exports = build;
+
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var alphabet = __webpack_require__(215);
+
+function isShortId(id) {
+    if (!id || typeof id !== 'string' || id.length < 6 ) {
+        return false;
+    }
+
+    var characters = alphabet.characters();
+    var len = id.length;
+    for(var i = 0; i < len;i++) {
+        if (characters.indexOf(id[i]) === -1) {
+            return false;
+        }
+    }
+    return true;
+}
+
+module.exports = isShortId;
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = 0;
+
+
+/***/ }),
+/* 225 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shortid__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shortid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_shortid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TextEditor__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib_identifiers__ = __webpack_require__(209);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+// fake data generator
+var getItems = function getItems(count) {
+  return Array.from({ length: count }, function (v, k) {
+    return k;
+  }).map(function (k) {
+    return {
+      id: 'item-' + k,
+      content: 'item ' + k
+    };
+  });
+};
+
+// a little function to help us with reordering the result
+var reorder = function reorder(list, startIndex, endIndex) {
+  var result = Array.from(list);
+
+  var _result$splice = result.splice(startIndex, 1),
+      _result$splice2 = _slicedToArray(_result$splice, 1),
+      removed = _result$splice2[0];
+
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
+var grid = 8;
+
+var getItemStyle = function getItemStyle(isDragging, draggableStyle) {
+  return _extends({
+    // some basic styles to make the items look a bit nicer
+    userSelect: "none",
+    padding: grid * 2,
+    margin: '0 0 ' + grid + 'px 0',
+
+    // change background colour if dragging
+    background: isDragging ? "lightgreen" : "grey"
+
+  }, draggableStyle);
+};
+
+var getListStyle = function getListStyle(isDraggingOver) {
+  return {
+    background: isDraggingOver ? "none" : "none"
+  };
+};
+
+var StoryCreator = function (_Component) {
+  _inherits(StoryCreator, _Component);
+
+  function StoryCreator(props) {
+    _classCallCheck(this, StoryCreator);
+
+    var _this = _possibleConstructorReturn(this, (StoryCreator.__proto__ || Object.getPrototypeOf(StoryCreator)).call(this, props));
+
+    _this.state = {
+      content: [],
+      contentLength: null
+    };
+
+    _this.addElement = _this.addElement.bind(_this);
+    _this.onDragEnd = _this.onDragEnd.bind(_this);
+    _this.onSetImageSize = _this.onSetImageSize.bind(_this);
+    return _this;
+  }
+
+  _createClass(StoryCreator, [{
+    key: 'addElement',
+    value: function addElement(toAdd) {
+      var content = this.state.content.slice();
+      if (toAdd === 'text') {
+        content.push({
+          id: __WEBPACK_IMPORTED_MODULE_3_shortid___default.a.generate(),
+          type: 'text',
+          content: '',
+          config: {
+            placeholder: 'Get those creative juices pumping!',
+            theme: 'snow'
+          }
+        });
+      } else if (toAdd === 'dialog') {
+        content.push({
+          id: __WEBPACK_IMPORTED_MODULE_3_shortid___default.a.generate(),
+          type: 'dialog',
+          content: '',
+          config: {
+            placeholder: 'Create some awesome dialog!',
+            theme: 'bubble'
+          }
+        });
+      } else if (toAdd === 'interaction') {
+        content.push({
+          id: __WEBPACK_IMPORTED_MODULE_3_shortid___default.a.generate(),
+          type: 'interaction',
+          content: '',
+          config: {
+            placeholder: 'Create some awesome story development!',
+            theme: 'snow'
+          }
+        });
+      } else if (toAdd === 'image') {
+        content.push({
+          id: __WEBPACK_IMPORTED_MODULE_3_shortid___default.a.generate(),
+          type: 'image',
+          config: {
+            size: 'l',
+            class: '',
+            file: null,
+            src: 'http://www.ex-astris-scientia.org/observations/11001001/02a-11001001-r.jpg'
+          }
+        });
+      }
+      this.setState({ content: content, contentLength: content.length });
+    }
+  }, {
+    key: 'onDragEnd',
+    value: function onDragEnd(result) {
+      // dropped outside the list
+      if (!result.destination) {
+        return;
+      }
+
+      var content = reorder(this.state.content, result.source.index, result.destination.index);
+
+      this.setState({
+        content: content
+      });
+    }
+  }, {
+    key: 'onSetImageSize',
+    value: function onSetImageSize(imageEl, size) {
+      var content = this.state.content;
+
+      var index = content.findIndex(function (item) {
+        return item.id === imageEl;
+      });
+      var item = content[index];
+
+      item.config.size = size;
+      item.config.class = size === 's' ? 'container-constrained m-auto' : '';
+
+      this.setState({ content: content });
+    }
+  }, {
+    key: 'onGetImage',
+    value: function onGetImage(imageEl) {
+      if (window.File && window.FileReader && window.FileList && window.Blob) {
+        // Great success! All the File APIs are supported.
+      } else {
+        alert('The File APIs are not fully supported in this browser.');
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var content = this.state.content;
+
+
+      return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'header',
+        { className: 'full bg-blue' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'section',
+          { className: 'landing-header p-100' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'text-center white pb-50 header-title page-title-input', placeholder: 'Lets Create!' }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'block header-divider pt-20 mb-20' }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'text-center white header-paragraph page-description-input', placeholder: 'This could be a story recap or intro to what is to come, You decide!' })
+        )
+      ), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'section',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h2',
+          { className: 'text-center black' },
+          'Create'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["a" /* DragDropContext */],
+            { onDragEnd: this.onDragEnd },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'relative' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'live-stage' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["c" /* Droppable */],
+                  { droppableId: 'droppable' },
+                  function (provided, snapshot) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      {
+                        ref: provided.innerRef,
+                        style: getListStyle(snapshot.isDraggingOver)
+                      },
+                      content.map(function (element, index) {
+                        if (element.type === 'text') {
+                          console.log('run');
+                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
+                            { key: element.id, draggableId: element.id, index: index },
+                            function (provided, snapshot) {
+                              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                _extends({
+                                  ref: provided.innerRef
+                                }, provided.draggableProps, provided.dragHandleProps),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                  'div',
+                                  { className: 'container' },
+                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { key: element.id, className: 'container-constrained m-auto story-text-block' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TextEditor__["a" /* default */], { id: element.id, config: element.config })
+                                  )
+                                )
+                              );
+                            }
+                          );
+                        } else if (element.type === 'image') {
+                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
+                            { key: element.id, draggableId: element.id, index: index },
+                            function (provided, snapshot) {
+                              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                {
+                                  className: 'story-creator-p-item-container ' + element.config.class,
+                                  key: element.id },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                  'div',
+                                  { className: 'story-creator-toolbelt' },
+                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'button',
+                                    { onClick: function onClick() {
+                                        return console.log('Upload');
+                                      } },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-file-image' })
+                                  ),
+                                  element.config.size === 's' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'button',
+                                    { onClick: function onClick() {
+                                        return _this2.onSetImageSize(element.id, 'l');
+                                      } },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-expand' })
+                                  ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'button',
+                                    { onClick: function onClick() {
+                                        return _this2.onSetImageSize(element.id, 's');
+                                      } },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-compress' })
+                                  )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                  'div',
+                                  { className: 'story-image' },
+                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', _extends({
+                                    src: element.config.src,
+                                    ref: provided.innerRef
+                                  }, provided.draggableProps, provided.dragHandleProps))
+                                )
+                              );
+                            }
+                          );
+                        } else if (element.type === 'dialog') {
+                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
+                            { key: element.id, draggableId: element.id, index: index },
+                            function (provided, snapshot) {
+                              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                _extends({
+                                  key: element.id,
+                                  ref: provided.innerRef
+                                }, provided.draggableProps, provided.dragHandleProps),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                  'div',
+                                  { className: 'container-constrained story-dialog-block m-auto' },
+                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'p',
+                                    null,
+                                    'dialog'
+                                  )
+                                )
+                              );
+                            }
+                          );
+                        } else if (element.type === 'interaction') {
+                          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2_react_beautiful_dnd__["b" /* Draggable */],
+                            { key: element.id, draggableId: element.id, index: index },
+                            function (provided, snapshot) {
+                              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                _extends({
+                                  key: element.id,
+                                  ref: provided.innerRef
+                                }, provided.draggableProps, provided.dragHandleProps),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                  'div',
+                                  { className: 'story-interaction-block' },
+                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'container container-constrained m-auto' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TextEditor__["a" /* default */], { id: element.id, config: element.config })
+                                  )
+                                )
+                              );
+                            }
+                          );
+                        }
+                      }),
+                      provided.placeholder
+                    );
+                  }
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'bg-white fixed toolbox-container' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'div',
+                  { className: 'toolbox' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'toolbox-buttons' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'button',
+                      { className: 'bg-blue p-20 text-left white', onClick: function onClick() {
+                          return _this2.addElement('text');
+                        } },
+                      'Add Text'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'button',
+                      { className: 'bg-pink p-20 text-left white', onClick: function onClick() {
+                          return _this2.addElement('dialog');
+                        } },
+                      'Add Dialog'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'button',
+                      { className: 'bg-magenta p-20 text-left white', onClick: function onClick() {
+                          return _this2.addElement('interaction');
+                        } },
+                      'Add Interaction'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'button',
+                      { className: 'bg-purple p-20 text-left white', onClick: function onClick() {
+                          return _this2.addElement('image');
+                        } },
+                      'Add Image'
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )];
+    }
+  }]);
+
+  return StoryCreator;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (StoryCreator);
+
+
+if (document.getElementById('create-container')) {
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(StoryCreator, null), document.getElementById('create-container'));
+}
 
 /***/ })
 /******/ ]);

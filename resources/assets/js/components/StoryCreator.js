@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import shortid from 'shortid';
 import TextEditor from './TextEditor';
 import { guid } from '../lib/identifiers';
 
@@ -52,42 +53,52 @@ export default class StoryCreator extends Component {
 
     this.addElement = this.addElement.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.onSetImageSize = this.onSetImageSize.bind(this);
   }
 
   addElement(toAdd) {
     let content = this.state.content.slice();
     if (toAdd === 'text') {
-      content.push({ 
+      content.push({
+        id: shortid.generate(), 
         type: 'text',
         content: '',
         config: {
           placeholder: 'Get those creative juices pumping!',
           theme: 'snow',
         },
-        id: `${guid()}` 
       });
     } else if (toAdd === 'dialog') {
       content.push({
+        id: shortid.generate(),
         type: 'dialog',
         content: '',
         config: {
           placeholder: 'Create some awesome dialog!',
           theme: 'bubble',
         },
-        id: `${guid()}`
       });
     } else if (toAdd === 'interaction') {
       content.push({
+        id: shortid.generate(),
         type: 'interaction',
         content: '',
         config: {
           placeholder: 'Create some awesome story development!',
           theme: 'snow',
         },
-        id: `${guid()}`
       });
     } else if (toAdd === 'image') {
-      content.push({ type: 'image', config: { size: 'l', src: '' }, id: `${guid()}` });
+      content.push({
+        id: shortid.generate(),
+        type: 'image',
+        config: {
+          size: 'l',
+          class: '',
+          file: null,
+          src: 'http://www.ex-astris-scientia.org/observations/11001001/02a-11001001-r.jpg'
+        },
+      });
     }
     this.setState({content, contentLength: content.length});
   }
@@ -107,6 +118,25 @@ export default class StoryCreator extends Component {
     this.setState({
       content
     });
+  }
+
+  onSetImageSize(imageEl, size) {
+    const { content } = this.state;
+    const index = content.findIndex(item => item.id === imageEl);
+    const item = content[index];
+
+    item.config.size = size;
+    item.config.class = (size === 's' ? 'container-constrained m-auto' : '');
+
+    this.setState({content});
+  }
+
+  onGetImage(imageEl) {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      // Great success! All the File APIs are supported.
+    } else {
+      alert('The File APIs are not fully supported in this browser.');
+    }
   }
 
   render() {
@@ -143,19 +173,38 @@ export default class StoryCreator extends Component {
                           </Draggable>
                         )
                       } else if (element.type === 'image') {
-                        if (element.config.size === l) {
-                          return(<Draggable key={element.id} draggableId={element.id} index={index}><img key={element.id} src={element.config.src} /></Draggable>);
-                        } else {
-                          return(
-                            <Draggable key={element.id} draggableId={element.id} index={index}>
-                              <div className="container">
-                                <div key={element.id} className="container-constrained m-auto">
-                                  <img src={element.config.src} />
+                        return(
+                          <Draggable key={element.id} draggableId={element.id} index={index}>
+                            {(provided, snapshot) => (
+                              <div
+                                className={`story-creator-p-item-container ${element.config.class}`}
+                                key={element.id}>
+                                <div className='story-creator-toolbelt'>
+                                  <button onClick={() => console.log('Upload')}>
+                                    <i className="fas fa-file-image"></i>
+                                  </button>
+                                  {
+                                    element.config.size === 's' ?
+                                      <button onClick={() => this.onSetImageSize(element.id, 'l')}>
+                                        <i className="fas fa-expand"></i>
+                                      </button>
+                                    :
+                                      <button onClick={() => this.onSetImageSize(element.id, 's')}>
+                                        <i className="fas fa-compress"></i>
+                                      </button>
+                                  }
+                                </div>
+                                <div className='story-image'>
+                                  <img
+                                    src={element.config.src}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps} />
                                 </div>
                               </div>
-                            </Draggable>
-                          )
-                        }
+                            )}
+                          </Draggable>
+                        );
                       } else if (element.type === 'dialog') {
                         return(
                           <Draggable key={element.id} draggableId={element.id} index={index}>

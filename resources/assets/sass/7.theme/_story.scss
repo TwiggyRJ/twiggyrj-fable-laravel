@@ -72,14 +72,3 @@
     object-fit: cover;
   }
 }
-
-.story-creator-toolbelt {
-  width: 200px;
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-
-  button {
-    color: $black;
-  }
-}

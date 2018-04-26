@@ -45,13 +45,32 @@ export default class StoryCreator extends Component {
     super(props);
     
     this.state = {
-      content: [],
+      content: [
+        {
+          id: shortid.generate(),
+          type: 'header',
+          content: {
+            title: '',
+            subtitle: '',
+            background: null,
+          },
+          config: {
+            placeholder: {
+              title: 'Lets Create!',
+              subtitle: 'This could be a story recap or intro to what is to come, You decide!',
+            },
+          },
+        }
+      ],
       contentLength: null,
     };
 
     this.addElement = this.addElement.bind(this);
+    this.removeElement = this.removeElement.bind(this);
+    this.reorderElements = this.reorderElements.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.onSetImageSize = this.onSetImageSize.bind(this);
+    this.setHeader = this.setHeader.bind(this);
   }
 
   addElement(toAdd) {
@@ -101,6 +120,27 @@ export default class StoryCreator extends Component {
     this.setState({content, contentLength: content.length});
   }
 
+  removeElement(toRemove) {
+    let content = this.state.content.slice(0);
+    const index = content.findIndex(item => item.id === toRemove);
+    content.splice(index, 1);
+
+    this.setState({ content, contentLength: content.length });
+  }
+
+  reorderElements(index, direction) {
+    console.log(index, 'index')
+    const destination = (direction === 'up' ? index - 1 : index + 1);
+    let content = this.state.content.splice(0);
+    console.log(content)
+    content.splice(destination, 0, content.splice(index, 1)[0]);
+
+    console.log(content, 'content')
+    console.log(destination, 'destination')
+
+    this.setState({ content });
+  }
+
   onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
@@ -118,6 +158,21 @@ export default class StoryCreator extends Component {
     });
   }
 
+  setHeader(newContent, section) {
+    const { content } = this.state;
+    const header = content[0];
+
+    if (section === 'title') {
+      header.content.title = newContent;
+    } else {
+      header.content.subtitle = newContent;
+    }
+
+    content[0] = header;
+
+    this.setState({ content });
+  }
+
   onSetImageSize(imageEl, size) {
     const { content } = this.state;
     const index = content.findIndex(item => item.id === imageEl);
@@ -125,6 +180,8 @@ export default class StoryCreator extends Component {
 
     item.config.size = size;
     item.config.class = (size === 's' ? 'container-constrained m-auto' : '');
+
+    content[index] = item;
 
     this.setState({content});
   }
@@ -139,17 +196,21 @@ export default class StoryCreator extends Component {
 
   render() {
     const { content } = this.state;
-
+    console.log(content.length)
     return [
       <header className="full bg-blue">
         <section className="landing-header p-100">
-          <textarea className="text-center white pb-50 header-title page-title-input" placeholder='Lets Create!' />
+          <textarea className="text-center white pb-50 header-title page-title-input" placeholder={this.state.content[0].config.placeholder.title} value={this.state.content[0].content.title} onChange={e => this.setHeader(e.target.value, 'title')} />
           <span className="block header-divider pt-20 mb-20"></span>
-          <textarea className="text-center white header-paragraph page-description-input" placeholder='This could be a story recap or intro to what is to come, You decide!' />
+          <textarea className="text-center white header-paragraph page-description-input" placeholder={this.state.content[0].config.placeholder.subtitle} value={this.state.content[0].content.subtitle} onChange={e => this.setHeader(e.target.value, 'subtitle')} />
         </section>
+        <div className="story-creator-toolbelt-generic-tools">
+          <button onClick={() => console.log('image')}>
+            <i className="fas fa-file-image"></i>
+          </button>
+        </div>
       </header>,
       <section>
-        <h2 className="text-center black">Create</h2>
         <div>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <div className="relative">
@@ -163,7 +224,6 @@ export default class StoryCreator extends Component {
                       {
                         content.map((element, index) => {
                           if (element.type === 'text') {
-                            console.log('run')
                             return (
                               <Draggable key={element.id} draggableId={element.id} index={index}>
                                 {(provided, snapshot) => (
@@ -201,6 +261,26 @@ export default class StoryCreator extends Component {
                                             <i className="fas fa-compress"></i>
                                           </button>
                                       }
+                                      <div className="story-creator-toolbelt-generic-tools">
+                                        {
+                                          content.length > 2 && index > 1 ?
+                                            <button onClick={() => this.reorderElements(index, 'up')}>
+                                              <i className="fas fa-arrow-up"></i>
+                                            </button>
+                                          :
+                                            null
+                                        }
+                                        {
+                                          content.length > 2 && index + 1 !== content.length ?
+                                            <button onClick={() => this.reorderElements(index, 'down')}>
+                                              <i className="fas fa-arrow-down"></i>
+                                            </button>
+                                          : null
+                                        }
+                                        <button className="toolbelt-delete" onClick={() => this.removeElement(element.id)}>
+                                          <i className="far fa-trash-alt"></i>
+                                        </button>
+                                      </div>
                                     </div>
                                     <div className='story-image'>
                                       <img

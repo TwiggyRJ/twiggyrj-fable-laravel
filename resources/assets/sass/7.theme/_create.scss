@@ -54,3 +54,31 @@
     font-family: $base-font-family;
   }
 }
+
+.story-creator-toolbelt {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  button {
+    background-color: $blue;
+    color: $white;
+
+    &:hover {
+      background-color: $pink;
+    }
+  }
+}
+
+.story-creator-toolbelt-generic-tools {
+  position: absolute;
+  right: 0;
+}
+
+.toolbelt-delete {
+  &:hover {
+    background-color: $red !important;
+  }
+}

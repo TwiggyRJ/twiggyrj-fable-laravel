@@ -82,3 +82,28 @@
     background-color: $red !important;
   }
 }
+
+.story-creator-card {
+  border-radius: 25px;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.story-creator-page-card {
+  color: $white;
+  transform: scale(.25);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-creator-new-page-card {
+  background-color: $pink;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 20vh;
+  width: 20vw;
+}

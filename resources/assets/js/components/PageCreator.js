@@ -40,7 +40,7 @@ const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? "none" : "none"
 });
 
-export default class StoryCreator extends Component {
+export default class PageCreator extends Component {
   constructor(props) {
     super(props);
     
@@ -354,5 +354,5 @@ export default class StoryCreator extends Component {
 }
 
 if (document.getElementById('create-container')) {
-  ReactDOM.render(<StoryCreator />, document.getElementById('create-container'));
+  ReactDOM.render(<PageCreator />, document.getElementById('create-container'));
 }

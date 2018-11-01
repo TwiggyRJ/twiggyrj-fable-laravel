@@ -10,6 +10,13 @@
 * include a modular scale etc.
 */
 
+@font-face {
+  font-family: 'Nickainley';
+  /*a name to be used later*/
+  src: url(/fonts/nickainley.otf?4e9af624ee7a27768318f6a09c6d2c80) format("opentype");
+  /*URL to font*/
+}
+
 /*
 * 2.Tools
 * =========================
@@ -608,6 +615,12 @@ h3,
   font-family: "Rubik", "Helvetica", "Arial", sans-serif;
   font-weight: 500;
   letter-spacing: 3px;
+}
+
+.brand-typography {
+  font-family: "Nickainley";
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
 }
 
 /*
@@ -14907,6 +14920,43 @@ button:active {
 
 .toolbelt-delete:hover {
   background-color: #f44336 !important;
+}
+
+.story-creator-card {
+  border-radius: 25px;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+          box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.story-creator-page-card {
+  color: #ffffff;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.story-creator-new-page-card {
+  background-color: #d2599b;
+  color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 20vh;
+  width: 20vw;
 }
 
 .welcome-block {

@@ -16,5 +16,5 @@ require('./bootstrap');
 
 
 window.addEventListener('load', function () {
-  require('./components/PageCreator');
+  require('./components/StoryCreator');
 })

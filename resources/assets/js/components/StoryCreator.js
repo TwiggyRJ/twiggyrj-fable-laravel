@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import shortid from 'shortid';
 import TextEditor from './TextEditor';
+import PageCreator from './PageCreator';
 import { guid } from '../lib/identifiers';
 
 // fake data generator
@@ -40,67 +41,95 @@ const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? "none" : "none"
 });
 
-
-
 export default class StoryCreator extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      content: [],
-      contentLength: null,
+      story: {
+        title: 'Story Title',
+        description: 'Story Description',
+      },
+      pages: [{
+        id: shortid.generate(),
+        type: '',
+        sections: [{
+          id: shortid.generate(),
+          type: 'header',
+          content: {
+            title: 'Page 1',
+            subtitle: '',
+            background: null,
+          },
+          config: {
+            placeholder: {
+              title: 'Lets Create!',
+              subtitle: 'This could be a story recap or intro to what is to come, You decide!',
+            },
+          },
+        }],
+        save: this.savePage,
+        config: {
+          first: true,
+          last: false,
+          gameOver: false,
+          order: 1,
+          linksTo: [],
+        },
+      }],
+      pagesLength: null,
     };
 
-    this.addElement = this.addElement.bind(this);
+    this.addPage = this.addPage.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
-    this.onSetImageSize = this.onSetImageSize.bind(this);
+    this.savePage = this.savePage.bind(this);
   }
 
-  addElement(toAdd) {
-    let content = this.state.content.slice();
-    if (toAdd === 'text') {
-      content.push({
-        id: shortid.generate(), 
-        type: 'text',
-        content: '',
-        config: {
-          placeholder: 'Get those creative juices pumping!',
-          theme: 'snow',
-        },
-      });
-    } else if (toAdd === 'dialog') {
-      content.push({
+  addPage(toAdd) {
+    let pages = this.state.pages.slice();
+    pages.push({
+      id: shortid.generate(),
+      type: '',
+      sections: [{
         id: shortid.generate(),
-        type: 'dialog',
-        content: '',
-        config: {
-          placeholder: 'Create some awesome dialog!',
-          theme: 'bubble',
+        type: 'header',
+        content: {
+          title: '',
+          subtitle: '',
+          background: null,
         },
-      });
-    } else if (toAdd === 'interaction') {
-      content.push({
-        id: shortid.generate(),
-        type: 'interaction',
-        content: '',
         config: {
-          placeholder: 'Create some awesome story development!',
-          theme: 'snow',
+          placeholder: {
+            title: 'Lets Create!',
+            subtitle: 'This could be a story recap or intro to what is to come, You decide!',
+          },
         },
-      });
-    } else if (toAdd === 'image') {
-      content.push({
-        id: shortid.generate(),
-        type: 'image',
-        config: {
-          size: 'l',
-          class: '',
-          file: null,
-          src: 'http://www.ex-astris-scientia.org/observations/11001001/02a-11001001-r.jpg'
-        },
-      });
-    }
-    this.setState({content, contentLength: content.length});
+      }],
+      save: this.savePage,
+      config: {
+        first: false,
+        last: false,
+        gameOver: false,
+        order: pages.length,
+        linksTo: [],
+      },
+    });
+    this.setState({pages, pagesLength: pages.length});
+  }
+
+  savePage(id, content) {
+    const { pages } = this.state;
+    const index = content.findIndex(item => item.id === id);
+    const item = pages[index];
+
+    item.content = content;
+    pages[index] = item;
+
+    this.setState({ page });
+  }
+
+  createPage() {
+    
   }
 
   onDragEnd(result) {
@@ -109,157 +138,73 @@ export default class StoryCreator extends Component {
       return;
     }
 
-    const content = reorder(
-      this.state.content,
+    const page = reorder(
+      this.state.page,
       result.source.index,
       result.destination.index
     );
 
     this.setState({
-      content
+      page
     });
   }
 
-  onSetImageSize(imageEl, size) {
-    const { content } = this.state;
-    const index = content.findIndex(item => item.id === imageEl);
-    const item = content[index];
-
-    item.config.size = size;
-    item.config.class = (size === 's' ? 'container-constrained m-auto' : '');
-
-    this.setState({content});
-  }
-
-  onGetImage(imageEl) {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-      // Great success! All the File APIs are supported.
-    } else {
-      alert('The File APIs are not fully supported in this browser.');
-    }
-  }
-
   render() {
-    const { content } = this.state;
-
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="relative">
-          <div className="live-stage">
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {
-                    content.map((element, index) => {
-                      if (element.type === 'text') {
-                        console.log('run')
-                        return(
-                          <Draggable key={element.id} draggableId={element.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}>
-                                <div className="container">
-                                  <div key={element.id} className="container-constrained m-auto story-text-block">
-                                    <TextEditor id={element.id} config={element.config} />
-                                  </div>
-                                </div>
-                              </div>
-                            )}
-                          </Draggable>
-                        )
-                      } else if (element.type === 'image') {
-                        return(
-                          <Draggable key={element.id} draggableId={element.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                className={`story-creator-p-item-container ${element.config.class}`}
-                                key={element.id}>
-                                <div className='story-creator-toolbelt'>
-                                  <button onClick={() => console.log('Upload')}>
-                                    <i className="fas fa-file-image"></i>
-                                  </button>
-                                  {
-                                    element.config.size === 's' ?
-                                      <button onClick={() => this.onSetImageSize(element.id, 'l')}>
-                                        <i className="fas fa-expand"></i>
-                                      </button>
-                                    :
-                                      <button onClick={() => this.onSetImageSize(element.id, 's')}>
-                                        <i className="fas fa-compress"></i>
-                                      </button>
-                                  }
-                                </div>
-                                <div className='story-image'>
-                                  <img
-                                    src={element.config.src}
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps} />
-                                </div>
-                              </div>
-                            )}
-                          </Draggable>
-                        );
-                      } else if (element.type === 'dialog') {
-                        return(
-                          <Draggable key={element.id} draggableId={element.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                key={element.id}
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}>
-                                <div className="container-constrained story-dialog-block m-auto">
-                                  <p>dialog</p>
-                                </div>
-                              </div>
-                            )}
-                          </Draggable>
-                        )
-                      } else if (element.type === 'interaction') {
-                        return(
-                          <Draggable key={element.id} draggableId={element.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                key={element.id}
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}>
-                                <div className="story-interaction-block">
-                                  <div className="container container-constrained m-auto">
-                                    <TextEditor id={element.id} config={element.config} />
-                                  </div>
-                                </div>
-                              </div>
-                            )}
-                          </Draggable>
-                        )
+    const { pages } = this.state;
+    return [
+      <header className="full bg-blue">
+        <section className="landing-header p-100">
+          <textarea className="text-center white pb-50 header-title page-title-input" placeholder={this.state.story.title} value={this.state.story.title} onChange={e => console.log(e.target.value)} />
+          <span className="block header-divider pt-20 mb-20"></span>
+          <textarea className="text-center white header-paragraph page-description-input" placeholder={this.state.story.description} value={this.state.story.description} onChange={e => console.log(e.target.value)} />
+        </section>
+        <div className="story-creator-toolbelt-generic-tools">
+          <button onClick={() => console.log('image')}>
+            <i className="fas fa-file-image"></i>
+          </button>
+        </div>
+      </header>,
+      <section>
+        <div>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <div className="relative">
+              <div className="live-stage">
+                <Droppable droppableId="droppable">
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      style={getListStyle(snapshot.isDraggingOver)}
+                    >
+                      {
+                        pages.map((page, index) => {
+                          console.log(page)
+                          return (
+                            <div className="story-creator-card story-creator-new-page-card" onClick={() => this.createPage()}>
+                              <p>+ New Page</p>
+                            </div>
+                          )
+                        })
                       }
-                    })
-                  }
-                  {provided.placeholder}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+              <div className="bg-white fixed toolbox-container">
+                <div className="toolbox">
+                  <div className="toolbox-buttons">
+                    <button className="bg-blue p-20 text-left white" onClick={() => this.addPage()}>Add Page</button>
+                    <button className="bg-pink p-20 text-left white" onClick={() => console.log('character')}>Add Character</button>
+                    <button className="bg-magenta p-20 text-left white" onClick={() => this.addElement('interaction')}>Add Interaction</button>
+                    <button className="bg-purple p-20 text-left white" onClick={() => this.addElement('image')}>Add Image</button>
+                  </div>
                 </div>
-              )}
-            </Droppable>
-          </div>
-          <div className="bg-white fixed toolbox-container">
-            <div className="toolbox">
-              <div className="toolbox-buttons">
-                <button className="bg-blue p-20 text-left white" onClick={() => this.addElement('text')}>Add Text</button>
-                <button className="bg-pink p-20 text-left white" onClick={() => this.addElement('dialog')}>Add Dialog</button>
-                <button className="bg-magenta p-20 text-left white" onClick={() => this.addElement('interaction')}>Add Interaction</button>
-                <button className="bg-purple p-20 text-left white" onClick={() => this.addElement('image')}>Add Image</button>
               </div>
             </div>
-          </div>
+          </DragDropContext>
         </div>
-      </DragDropContext>
-    );
+      </section>
+    ];
   }
 }
 

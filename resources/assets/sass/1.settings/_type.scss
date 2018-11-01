@@ -3,6 +3,12 @@
 * include a modular scale etc.
 */
 
+@font-face {
+  font-family: 'Nickainley'; /*a name to be used later*/
+  src: url('../../fonts/nickainley.otf') format('opentype'); /*URL to font*/
+}
+
+$brand-font-family: 'Nickainley';
 $base-font-family: 'Rubik', 'Helvetica', 'Arial', sans-serif;
 $base-serif-font-family: 'Lato', serif;
 
